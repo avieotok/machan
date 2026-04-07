@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<link rel="manifest" id="manifest-link">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADV0lEQVR4nO3c223VQABF0QTRBvRGEVAERUBvVMIHkgERQsj2Y2a8VgVzPVvnx/J9fPfl4wO81purD8DcBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAT0D98+fL76CEMT0HN+1KOhZzz6j8QnPRnN+6+fzj/J4CzQE/42OaboTxboNy9MxBRtLNBPLx8YU7SxQA8PIQhTZIHSnJiiWy/Qjtd/2ym67wLtOx63naI7LtChl323KbrdAh09FXebohst0MlXe5MpussCnT8MN5mi9Rfo2otcfocWD2iQGVg4o2UDGiSdzaoNrRnQaPVs1stotYCGTWezWENLBTR+PZtlMlokoInS2azR0AoBzVjPZvaM5g5o6nQ2Uzc0cUBr1LOZNKMpA1osnc2MDc0X0Kr1bObKaLKXqcvX8zDbb5xmgeZ6rN0sOzRHQHerZzN+RqMHdNt0NoM3NHRA6tkMm9GgAUnnT2M2NGJA6nnGaBmNFZB0XmKohgYKSD3/ZZCMhghIOq8zQkPXB6Se6NqMrgxIOnu5sKHLAlLP7i7J6IKApHOc8xs6+228eg51/uM9b4Gkc6bTpuikBVLPyU574IcvkHSudfQUHbtA6rnc0Vdw1AJJZzQHTdEhC6SeAR10KTsvkHTGt+8U7blA6pnCvte0zwJJZ0a7TNEOC6SeSe1ycWmBpLOGMkWvXyD1LKNc5UnvwtR2vnNeh032bTyjERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiOTt1Qc4ygj/4v6rVb+Ms0AkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIJLHd18+Xn0GJmaBSAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEi+A53F3a7Vv0PXAAAAAElFTkSuQmCC">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="מחסן">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="מחסן">
+<meta name="theme-color" content="#1a1a18">
+<title>מחסן</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --bg:#f2f2f0;--card:#fff;--text:#1a1a18;--text2:#6b6a66;--text3:#9b9a97;
+  --b1:rgba(0,0,0,0.1);--b2:rgba(0,0,0,0.2);
+  --in:#1D9E75;--inl:#E1F5EE;--ind:#085041;
+  --out:#E24B4a;--outl:#FCEBEB;--outd:#791F1F;
+  --pu:#534AB7;--pul:#EEEDFE;--pud:#3C3489;
+  --am:#BA7517;--aml:#FAEEDA;--amd:#633806;
+  --r:16px;--rs:12px;
+}
+@media(prefers-color-scheme:dark){:root{
+  --bg:#111;--card:#1e1e1c;--text:#f0efe8;--text2:#a0a09a;--text3:#6b6a66;
+  --b1:rgba(255,255,255,0.08);--b2:rgba(255,255,255,0.2);
+  --in:#5DCAA5;--inl:#04342C;--ind:#9FE1CB;
+  --out:#F09595;--outl:#501313;--outd:#F7C1C1;
+  --pu:#AFA9EC;--pul:#26215C;--pud:#CECBF6;
+  --am:#EF9F27;--aml:#412402;--amd:#FAC775;
+}}
+html,body{height:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;flex-direction:column}
+.header{background:var(--card);border-bottom:0.5px solid var(--b1);display:flex;align-items:center;justify-content:space-between;padding:12px 16px;padding-top:calc(12px + env(safe-area-inset-top));flex-shrink:0}
+.htitle{font-size:18px;font-weight:700}
+.hsub{font-size:11px;color:var(--text3);margin-top:1px}
+.hbtns{display:flex;gap:7px}
+.hbtn{height:33px;padding:0 11px;font-size:12px;font-weight:500;border:0.5px solid var(--b2);border-radius:20px;cursor:pointer;font-family:inherit}
+.hbtn-pu{background:var(--pul);color:var(--pud);border-color:var(--pu)}
+.hbtn-am{background:var(--aml);color:var(--amd);border-color:var(--am)}
+
+.content{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(70px + env(safe-area-inset-bottom))}
+.view{display:none;padding:14px}
+.view.active{display:block}
+
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px}
+.stat{background:var(--card);border-radius:var(--r);padding:13px 8px;text-align:center}
+.stat-v{font-size:24px;font-weight:700;line-height:1}
+.stat-l{font-size:10px;color:var(--text3);margin-top:3px}
+
+.abig{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.abtn{border:none;border-radius:var(--r);cursor:pointer;font-family:inherit;aspect-ratio:1/1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;transition:transform .1s}
+.abtn:active{transform:scale(.93)}
+.abtn-icon{font-size:44px;line-height:1}
+.abtn-lbl{font-size:17px;font-weight:700}
+.abtn-sub{font-size:11px;opacity:.7}
+.ain{background:var(--inl);color:var(--ind)}
+.aout{background:var(--outl);color:var(--outd)}
+
+.sec{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:9px;display:flex;align-items:center;justify-content:space-between}
+.ftabs{display:flex;gap:5px}
+.ftab{padding:4px 11px;font-size:12px;border:0.5px solid var(--b2);border-radius:20px;background:transparent;cursor:pointer;color:var(--text2);font-family:inherit}
+.ftab.on{background:var(--pul);color:var(--pud);border-color:var(--pu)}
+
+.logitem{background:var(--card);border-radius:var(--r);padding:13px 14px;margin-bottom:9px;display:flex;align-items:flex-start;gap:11px}
+.ldot{width:11px;height:11px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.din{background:var(--in)}.dout{background:var(--out)}
+.lbody{flex:1;min-width:0}
+.lname{font-size:15px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lsku{font-size:12px;color:var(--pu);font-weight:600;margin-top:2px}
+.ldesc{font-size:12px;color:var(--text2);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lmeta{font-size:11px;color:var(--text3);margin-top:3px}
+.lnote{font-size:11px;color:var(--text2);margin-top:3px;font-style:italic}
+.lqty{font-size:20px;font-weight:700;flex-shrink:0}
+.qin{color:var(--in)}.qout{color:var(--out)}
+.empty{text-align:center;color:var(--text3);font-size:14px;padding:3rem 0}
+
+/* FORM */
+.fhead{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.backbtn{width:40px;height:40px;border-radius:50%;border:0.5px solid var(--b2);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:20px;flex-shrink:0;color:var(--text)}
+.ftitle{font-size:19px;font-weight:700;flex:1}
+.fbadge{font-size:11px;padding:3px 11px;border-radius:20px;font-weight:600;flex-shrink:0}
+.bin{background:var(--inl);color:var(--ind)}.bout{background:var(--outl);color:var(--outd)}
+.fld{margin-bottom:13px;position:relative}
+.fld label{display:block;font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:600;letter-spacing:.02em}
+.fld input,.fld select,.fld textarea{width:100%;padding:13px 14px;font-size:16px;background:var(--card);border:0.5px solid var(--b2);border-radius:var(--rs);color:var(--text);font-family:inherit;-webkit-appearance:none;appearance:none}
+.fld input:focus,.fld textarea:focus{outline:none;border-color:var(--pu);border-width:1.5px}
+.fld textarea{resize:none;height:72px;line-height:1.5}
+.srow{display:flex;gap:7px}
+.srow input{flex:1}
+.scambtn{width:46px;height:46px;border:0.5px solid var(--b2);border-radius:var(--rs);background:var(--aml);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:22px;flex-shrink:0;color:var(--amd)}
+.sclrbtn{width:40px;height:46px;border:0.5px solid var(--b2);border-radius:var(--rs);background:var(--bg);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;flex-shrink:0;color:var(--text3)}
+.sugg{position:absolute;top:100%;right:0;left:0;background:var(--card);border:1.5px solid var(--pu);border-radius:var(--rs);z-index:50;max-height:210px;overflow-y:auto;margin-top:3px;display:none}
+.sugg.open{display:block}
+.sugitem{padding:11px 13px;cursor:pointer;border-bottom:0.5px solid var(--b1)}
+.sugitem:last-child{border-bottom:none}
+.sugitem:active{background:var(--bg)}
+.sug-sku{font-size:12px;font-weight:700;color:var(--pu)}
+.sug-name{font-size:15px;color:var(--text)}
+.sug-desc{font-size:11px;color:var(--text3)}
+.selbox{background:var(--pul);border-radius:var(--rs);padding:10px 13px;margin-bottom:12px;display:none;align-items:center;gap:8px}
+.selbox.on{display:flex}
+.selinfo{flex:1;min-width:0}
+.selinfo .sc{font-size:11px;font-weight:700;color:var(--pud)}
+.selinfo .sn{font-size:14px;font-weight:600;color:var(--text)}
+.selinfo .sd{font-size:11px;color:var(--text2)}
+.seldel{font-size:18px;color:var(--text3);cursor:pointer;flex-shrink:0;padding:4px}
+.qrow{display:flex;align-items:center;gap:10px}
+.qside{width:50px;height:50px;border-radius:var(--rs);border:0.5px solid var(--b2);background:var(--card);font-size:26px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);flex-shrink:0;font-family:inherit;transition:transform .1s}
+.qside:active{transform:scale(.88)}
+.qmid{flex:1;text-align:center;font-size:26px;font-weight:700;padding:10px;background:var(--card);border:0.5px solid var(--b2);border-radius:var(--rs);color:var(--text)}
+.savebtn{width:100%;padding:17px;font-size:17px;font-weight:700;border:none;border-radius:var(--r);cursor:pointer;font-family:inherit;margin-top:6px}
+.savebtn:active{transform:scale(.97)}
+.sin{background:var(--in);color:#fff}.sout{background:var(--out);color:#fff}
+.cancellnk{display:block;text-align:center;color:var(--text3);font-size:14px;padding:15px;cursor:pointer}
+
+/* SKU manager */
+.skucard{background:var(--card);border-radius:var(--r);border:0.5px solid var(--b1);padding:15px;margin-bottom:12px}
+.skucard-title{font-size:15px;font-weight:700;margin-bottom:12px}
+.upzone{border:1.5px dashed var(--b2);border-radius:var(--rs);padding:26px 14px;text-align:center;cursor:pointer}
+.upzone:active{border-color:var(--pu)}
+.upicon{font-size:34px;margin-bottom:6px}
+.uptxt{font-size:15px;font-weight:600;color:var(--text)}
+.upsub{font-size:12px;color:var(--text3);margin-top:3px}
+.upinput{display:none}
+.skucnt{background:var(--inl);color:var(--ind);border-radius:var(--rs);padding:9px 13px;font-size:13px;font-weight:600;margin-top:10px;display:none;align-items:center;justify-content:space-between}
+.skucnt.on{display:flex}
+.skutbwrap{margin-top:12px;max-height:260px;overflow-y:auto;border-radius:var(--rs);border:0.5px solid var(--b1)}
+.skutb{width:100%;border-collapse:collapse;font-size:13px}
+.skutb th{padding:8px 11px;text-align:right;font-weight:600;color:var(--text2);font-size:10px;text-transform:uppercase;background:var(--bg);position:sticky;top:0}
+.skutb td{padding:9px 11px;border-top:0.5px solid var(--b1);color:var(--text)}
+.skutb td:first-child{font-weight:700;color:var(--pu);width:85px}
+.hint{background:var(--aml);border-radius:var(--rs);padding:11px 13px;font-size:12px;color:var(--amd);margin-top:10px;line-height:1.6}
+
+/* CAMERA */
+.cam{position:fixed;inset:0;background:#000;z-index:500;display:none;flex-direction:column}
+.cam.on{display:flex}
+.camhdr{padding:14px 16px;padding-top:calc(14px + env(safe-area-inset-top));display:flex;align-items:center;gap:12px;flex-shrink:0}
+.camclose{width:40px;height:40px;border-radius:50%;border:none;background:rgba(255,255,255,.15);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.camtitle{color:#fff;font-size:16px;font-weight:700}
+.camsub{color:rgba(255,255,255,.6);font-size:12px;margin-top:1px}
+.camvwrap{flex:1;position:relative;overflow:hidden}
+#camvid{width:100%;height:100%;object-fit:cover}
+.camframe{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
+.cambox{width:70%;max-width:260px;aspect-ratio:3/2;border:2px solid rgba(255,255,255,.8);border-radius:10px;position:relative;overflow:hidden}
+.camline{position:absolute;top:0;left:4px;right:4px;height:2px;background:rgba(80,220,150,.9);border-radius:1px;animation:scan 1.8s linear infinite}
+@keyframes scan{0%{top:6px}100%{top:calc(100% - 8px)}}
+.camhint{color:rgba(255,255,255,.65);font-size:13px;text-align:center;padding:12px 16px;flex-shrink:0}
+.camres{background:rgba(255,255,255,.12);border-radius:12px;margin:0 14px 14px;padding:13px;display:none}
+.camres.on{display:block}
+.camcode{font-size:19px;font-weight:700;color:#fff;text-align:center;letter-spacing:.05em}
+.camname{font-size:13px;color:rgba(255,255,255,.7);text-align:center;margin-top:4px}
+.camusebtn{width:100%;padding:13px;margin-top:9px;border:none;border-radius:10px;background:var(--in);color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+.camfallback{display:flex;flex-direction:column;align-items:center;justify-content:center;flex:1;padding:20px;gap:14px}
+.camfallback-txt{color:rgba(255,255,255,.7);font-size:14px;text-align:center;line-height:1.6}
+.camphoto{padding:14px 28px;border:none;border-radius:12px;background:rgba(255,255,255,.15);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit}
+.photoinput{display:none}
+
+/* Bottom nav */
+.bnav{position:fixed;bottom:0;left:0;right:0;background:var(--card);border-top:0.5px solid var(--b1);display:flex;align-items:flex-start;padding-top:8px;padding-bottom:env(safe-area-inset-bottom);z-index:100}
+.nitem{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;padding:3px 0}
+.nicon{font-size:23px;line-height:1}
+.nlbl{font-size:10px;color:var(--text3);font-weight:500}
+.nitem.on .nlbl{color:var(--pu)}
+
+.toast{position:fixed;bottom:calc(76px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%) translateY(6px);background:rgba(26,26,24,.93);color:#f0efe8;padding:11px 22px;border-radius:22px;font-size:14px;font-weight:500;opacity:0;transition:all .22s;pointer-events:none;white-space:nowrap;z-index:600}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.install-banner{background:var(--pul);border:1px solid var(--pu);border-radius:var(--r);padding:14px 16px;margin:14px 0;display:none}
+.install-banner.show{display:block}
+.ib-title{font-size:14px;font-weight:700;color:var(--pud);margin-bottom:6px}
+.ib-steps{font-size:13px;color:var(--pud);line-height:1.8}
+.ib-close{float:left;font-size:16px;cursor:pointer;color:var(--pud);margin-top:-2px;margin-left:-4px}
+.ios-arrow{display:inline-block;font-size:18px;vertical-align:middle}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <div class="htitle">מחסן</div>
+    <div class="hsub" id="hdate"></div>
+  </div>
+  <div class="hbtns">
+    <button class="hbtn hbtn-am" onclick="exportCSV()">CSV</button>
+    <button class="hbtn hbtn-pu" onclick="goNav('skus')">מק"טים</button>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- HOME -->
+  <div class="view active" id="view-home">
+    <div class="install-banner" id="install-banner">
+      <span class="ib-close" onclick="closeBanner()">✕</span>
+      <div class="ib-title">📱 הוסף למסך הבית</div>
+      <div class="ib-steps">
+        1. לחץ על <strong>שתף</strong> <span class="ios-arrow">⬆</span> בתחתית Safari<br>
+        2. גלול למטה ← <strong>"הוסף למסך הבית"</strong><br>
+        3. לחץ <strong>"הוסף"</strong> — האייקון יופיע!
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="stat-v" id="s-in">0</div><div class="stat-l">כניסות</div></div>
+      <div class="stat"><div class="stat-v" id="s-out">0</div><div class="stat-l">יציאות</div></div>
+      <div class="stat"><div class="stat-v" id="s-total">0</div><div class="stat-l">סה"כ</div></div>
+    </div>
+    <div class="abig">
+      <button class="abtn ain" onclick="openForm('in')">
+        <span class="abtn-icon">📥</span>
+        <span class="abtn-lbl">קיבלתי</span>
+        <span class="abtn-sub">כניסה למחסן</span>
+      </button>
+      <button class="abtn aout" onclick="openForm('out')">
+        <span class="abtn-icon">📤</span>
+        <span class="abtn-lbl">הוצאתי</span>
+        <span class="abtn-sub">יציאה מהמחסן</span>
+      </button>
+    </div>
+    <div class="sec">
+      <span>פעולות היום</span>
+      <div class="ftabs">
+        <button class="ftab on" onclick="setF('all',this)">הכל</button>
+        <button class="ftab" onclick="setF('in',this)">כניסות</button>
+        <button class="ftab" onclick="setF('out',this)">יציאות</button>
+      </div>
+    </div>
+    <div id="loglist"></div>
+  </div>
+
+  <!-- FORM -->
+  <div class="view" id="view-form">
+    <div class="fhead">
+      <button class="backbtn" onclick="showView('home')">←</button>
+      <div class="ftitle" id="ftitle"></div>
+      <span class="fbadge" id="fbadge"></span>
+    </div>
+
+    <div class="fld">
+      <label>חיפוש מק"ט / שם פריט</label>
+      <div style="position:relative">
+        <div class="srow">
+          <input type="text" id="fsearch" placeholder='הקלד מק"ט או שם...' autocomplete="off" autocorrect="off" oninput="doSearch(this.value)" onfocus="doSearch(this.value)">
+          <button class="scambtn" onclick="openCam()" title="סרוק ברקוד">📷</button>
+          <button class="sclrbtn" onclick="clearSearch()">✕</button>
+        </div>
+        <div class="sugg" id="sugg"></div>
+      </div>
+    </div>
+
+    <div class="selbox" id="selbox">
+      <div class="selinfo">
+        <div class="sc" id="sel-sku"></div>
+        <div class="sn" id="sel-name"></div>
+        <div class="sd" id="sel-desc"></div>
+      </div>
+      <div class="seldel" onclick="clearSel()">✕</div>
+    </div>
+
+    <div class="fld" id="namefld">
+      <label>שם פריט <span style="color:var(--text3);font-weight:400">(ידני)</span></label>
+      <input type="text" id="fname" placeholder="הכנס שם..." autocomplete="off">
+    </div>
+
+    <div class="fld">
+      <label>תיאור המוצר</label>
+      <input type="text" id="fdesc" placeholder="תיאור קצר..." autocomplete="off">
+    </div>
+
+    <div class="fld">
+      <label>כמות</label>
+      <div class="qrow">
+        <button class="qside" onclick="chgQ(-1)">−</button>
+        <input type="number" class="qmid" id="fqty" value="1" min="1" inputmode="numeric">
+        <button class="qside" onclick="chgQ(1)">+</button>
+      </div>
+    </div>
+
+    <div class="fld">
+      <label>ספק / לקוח</label>
+      <input type="text" id="fsup" placeholder="שם הספק או הלקוח" autocomplete="off">
+    </div>
+
+    <div class="fld">
+      <label>מיקום במחסן</label>
+      <input type="text" id="floc" placeholder="מדף A3, אזור 2..." autocomplete="off">
+    </div>
+
+    <div class="fld">
+      <label>הערות</label>
+      <textarea id="fnotes" placeholder="פגמים, חוסרים..."></textarea>
+    </div>
+
+    <button class="savebtn" id="savebtn" onclick="submit()">שמור דיווח</button>
+    <span class="cancellnk" onclick="showView('home')">ביטול</span>
+  </div>
+
+  <!-- HISTORY -->
+  <div class="view" id="view-history">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:13px">
+      <div style="font-size:16px;font-weight:700">כל הרשומות</div>
+      <button onclick="clearAll()" style="padding:6px 13px;font-size:12px;border:0.5px solid var(--b2);border-radius:20px;background:var(--outl);color:var(--outd);cursor:pointer;font-family:inherit;font-weight:600">נקה הכל</button>
+    </div>
+    <div id="histlist"></div>
+  </div>
+
+  <!-- SKUS -->
+  <div class="view" id="view-skus">
+    <div style="font-size:16px;font-weight:700;margin-bottom:13px">מאגר מק"טים</div>
+    <div class="skucard">
+      <div class="skucard-title">טעינת קובץ</div>
+      <div class="upzone" onclick="document.getElementById('csvup').click()">
+        <div class="upicon">📂</div>
+        <div class="uptxt">בחר קובץ CSV</div>
+        <div class="upsub">ייצא מאקסל/פיוריטי כ-CSV</div>
+      </div>
+      <input type="file" id="csvup" class="upinput" accept=".csv,.txt" onchange="loadCSV(this)">
+      <div class="skucnt" id="skucnt">
+        <span id="skucnt-txt"></span>
+        <button onclick="clearSkus()" style="font-size:11px;padding:4px 9px;border:0.5px solid var(--ind);border-radius:10px;background:transparent;color:var(--ind);cursor:pointer;font-family:inherit">נקה</button>
+      </div>
+      <div class="hint">
+        <strong>מבנה CSV:</strong><br>
+        עמודה 1: מק"ט &nbsp;|&nbsp; עמודה 2: שם מוצר &nbsp;|&nbsp; עמודה 3: תיאור<br>
+        <span style="opacity:.8">שורה ראשונה = כותרות (מדולגת)</span>
+      </div>
+    </div>
+    <div id="skupreview"></div>
+  </div>
+
+</div>
+
+<!-- CAMERA OVERLAY -->
+<div class="cam" id="cam">
+  <div class="camhdr">
+    <button class="camclose" onclick="closeCam()">✕</button>
+    <div>
+      <div class="camtitle">סריקת ברקוד</div>
+      <div class="camsub">כוון את הברקוד למסגרת</div>
+    </div>
+  </div>
+  <div class="camvwrap" id="camvwrap">
+    <video id="camvid" playsinline muted autoplay></video>
+    <div class="camframe"><div class="cambox"><div class="camline"></div></div></div>
+  </div>
+  <div class="camhint" id="camhint">מחפש ברקוד...</div>
+  <div class="camres" id="camres">
+    <div class="camcode" id="camcode"></div>
+    <div class="camname" id="camname"></div>
+    <button class="camusebtn" onclick="useScan()">השתמש ✓</button>
+  </div>
+  <input type="file" id="photoup" class="photoinput" accept="image/*" capture="environment" onchange="decodePhoto(this)">
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bnav">
+  <div class="nitem on" id="nav-home" onclick="goNav('home')">
+    <span class="nicon">🏠</span><div class="nlbl">ראשי</div>
+  </div>
+  <div class="nitem" id="nav-history" onclick="goNav('history')">
+    <span class="nicon">📋</span><div class="nlbl">היסטוריה</div>
+  </div>
+  <div class="nitem" id="nav-skus" onclick="goNav('skus')">
+    <span class="nicon">📦</span><div class="nlbl">מק"טים</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var recs = ls('wh_recs') || [];
+var skus = ls('wh_skus') || [];
+var curType = 'in';
+var curFilter = 'all';
+var srList = [];
+var scanned = null;
+var camStream = null;
+var camInterval = null;
+var selSku = null;
+
+function ls(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } }
+function lsSet(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+function today(){ return new Date().toISOString().split('T')[0]; }
+function nowTime(){ return new Date().toLocaleTimeString('he-IL',{hour:'2-digit',minute:'2-digit'}); }
+function fmtD(iso){ return new Date(iso).toLocaleDateString('he-IL',{day:'numeric',month:'numeric'}); }
+function esc(s){ return (s||'').replace(/[<>&"]/g,function(c){ return {'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c]; }); }
+
+document.getElementById('hdate').textContent = new Date().toLocaleDateString('he-IL',{weekday:'long',day:'numeric',month:'long'});
+
+function loadCSV(inp){
+  var f = inp.files[0];
+  if(!f) return;
+  var r = new FileReader();
+  r.onload = function(e){
+    var lines = e.target.result.replace(/\r/g,'').split('\n').filter(function(l){ return l.trim(); });
+    var parsed = [];
+    for(var i=1; i<lines.length; i++){
+      var cols = parseCSVLine(lines[i]);
+      var sku = (cols[0]||'').trim();
+      var name = (cols[1]||'').trim();
+      var desc = (cols[2]||'').trim();
+      if(sku||name) parsed.push({sku:sku, name:name, desc:desc});
+    }
+    if(!parsed.length){ toast('לא נמצאו שורות'); return; }
+    skus = parsed;
+    lsSet('wh_skus', skus);
+    renderSkuMgr();
+    toast('נטענו ' + skus.length + ' מק"טים ✓');
+    inp.value='';
+  };
+  r.readAsText(f, 'utf-8');
+}
+
+function parseCSVLine(line){
+  var cols = [];
+  var cur = '';
+  var inQ = false;
+  for(var i=0; i<line.length; i++){
+    var c = line[i];
+    if(c==='"'){ inQ=!inQ; }
+    else if(c===','&&!inQ){ cols.push(cur); cur=''; }
+    else{ cur+=c; }
+  }
+  cols.push(cur);
+  return cols;
+}
+
+function clearSkus(){
+  if(!confirm('למחוק את כל המק"טים?')) return;
+  skus=[]; lsSet('wh_skus',[]); renderSkuMgr(); toast('נמחק');
+}
+
+function renderSkuMgr(){
+  var cnt = document.getElementById('skucnt');
+  var pre = document.getElementById('skupreview');
+  if(!skus.length){ cnt.classList.remove('on'); pre.innerHTML=''; return; }
+  cnt.classList.add('on');
+  document.getElementById('skucnt-txt').textContent = skus.length + ' מק"טים טעונים';
+  var rows = skus.slice(0,60).map(function(s){
+    return '<tr><td>'+esc(s.sku)+'</td><td>'+esc(s.name)+'</td><td style="color:var(--text3)">'+esc(s.desc)+'</td></tr>';
+  }).join('');
+  var more = skus.length>60 ? '<tr><td colspan="3" style="text-align:center;color:var(--text3);padding:10px">... עוד '+(skus.length-60)+' פריטים</td></tr>' : '';
+  pre.innerHTML='<div class="skutbwrap"><table class="skutb"><thead><tr><th>מק"ט</th><th>שם</th><th>תיאור</th></tr></thead><tbody>'+rows+more+'</tbody></table></div>';
+}
+
+function doSearch(q){
+  var box = document.getElementById('sugg');
+  q = q.trim();
+  if(!q||!skus.length){ box.classList.remove('open'); return; }
+  var ql = q.toLowerCase();
+  srList = skus.filter(function(s){
+    return s.sku.toLowerCase().indexOf(ql)>=0 ||
+           s.name.toLowerCase().indexOf(ql)>=0 ||
+           (s.desc||'').toLowerCase().indexOf(ql)>=0;
+  }).slice(0,8);
+  if(!srList.length){
+    box.innerHTML='<div style="padding:13px;text-align:center;color:var(--text3);font-size:13px">לא נמצאו תוצאות</div>';
+    box.classList.add('open'); return;
+  }
+  box.innerHTML = srList.map(function(s,i){
+    return '<div class="sugitem" onmousedown="pickSku('+i+')">' +
+      '<div class="sug-sku">'+esc(s.sku)+'</div>' +
+      '<div class="sug-name">'+esc(s.name)+'</div>' +
+      (s.desc?'<div class="sug-desc">'+esc(s.desc)+'</div>':'') +
+      '</div>';
+  }).join('');
+  box.classList.add('open');
+}
+
+function pickSku(i){
+  var s = srList[i];
+  if(!s) return;
+  applySku(s);
+}
+
+function applySku(s){
+  selSku = s;
+  document.getElementById('sugg').classList.remove('open');
+  document.getElementById('fsearch').value = s.sku + (s.name?' — '+s.name:'');
+  document.getElementById('fname').value = s.name;
+  document.getElementById('fdesc').value = s.desc||'';
+  document.getElementById('sel-sku').textContent = s.sku;
+  document.getElementById('sel-name').textContent = s.name;
+  document.getElementById('sel-desc').textContent = s.desc||'';
+  document.getElementById('selbox').classList.add('on');
+  document.getElementById('namefld').style.display='none';
+}
+
+function clearSearch(){
+  document.getElementById('fsearch').value='';
+  document.getElementById('sugg').classList.remove('open');
+  clearSel();
+}
+
+function clearSel(){
+  selSku=null;
+  document.getElementById('selbox').classList.remove('on');
+  document.getElementById('namefld').style.display='';
+  document.getElementById('fname').value='';
+  document.getElementById('fdesc').value='';
+}
+
+document.addEventListener('click', function(e){
+  if(!e.target.closest('.fld')) document.getElementById('sugg').classList.remove('open');
+});
+
+/* ---- CAMERA ---- */
+function openCam(){
+  document.getElementById('cam').classList.add('on');
+  scanned=null;
+  document.getElementById('camres').classList.remove('on');
+  document.getElementById('camhint').textContent='מחפש ברקוד...';
+
+  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
+    startLiveCam();
+  } else {
+    showCamFallback();
+  }
+}
+
+function startLiveCam(){
+  var constraints = {video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}};
+  navigator.mediaDevices.getUserMedia(constraints).then(function(stream){
+    camStream = stream;
+    var vid = document.getElementById('camvid');
+    vid.srcObject = stream;
+    vid.play();
+    vid.addEventListener('playing', startDetect, {once:true});
+  }).catch(function(){
+    showCamFallback();
+  });
+}
+
+function showCamFallback(){
+  var wrap = document.getElementById('camvwrap');
+  wrap.innerHTML = '<div class="camfallback">' +
+    '<div style="font-size:48px">📷</div>' +
+    '<div class="camfallback-txt">לסריקה ישירה — פתח את הקובץ דרך Chrome.<br><br>לחלופין, צלם את הברקוד:</div>' +
+    '<button class="camphoto" onclick="document.getElementById(\'photoup\').click()">צלם ברקוד</button>' +
+    '</div>';
+  document.getElementById('camhint').textContent='';
+}
+
+function startDetect(){
+  if('BarcodeDetector' in window){
+    var det = new BarcodeDetector({formats:['ean_13','ean_8','code_128','code_39','qr_code','upc_a','upc_e','itf','codabar']});
+    var vid = document.getElementById('camvid');
+    camInterval = setInterval(function(){
+      if(!document.getElementById('cam').classList.contains('on')){ clearInterval(camInterval); return; }
+      if(vid.readyState < 2) return;
+      det.detect(vid).then(function(codes){
+        if(codes.length && codes[0].rawValue !== scanned){
+          onBarcode(codes[0].rawValue);
+        }
+      }).catch(function(){});
+    }, 400);
+  } else {
+    document.getElementById('camhint').textContent = 'הדפדפן לא תומך בסריקה אוטומטית — נסה Chrome בגרסה עדכנית';
+  }
+}
+
+function decodePhoto(inp){
+  var f = inp.files[0];
+  if(!f) return;
+  if(!('BarcodeDetector' in window)){ toast('הדפדפן לא תומך בפענוח תמונות'); return; }
+  var img = new Image();
+  var url = URL.createObjectURL(f);
+  img.onload = function(){
+    var det = new BarcodeDetector();
+    det.detect(img).then(function(codes){
+      URL.revokeObjectURL(url);
+      if(codes.length){ onBarcode(codes[0].rawValue); }
+      else { toast('לא נמצא ברקוד בתמונה — נסה שוב'); }
+    }).catch(function(){ URL.revokeObjectURL(url); toast('שגיאה בפענוח'); });
+  };
+  img.src = url;
+  inp.value='';
+}
+
+function onBarcode(code){
+  scanned = code;
+  try{ navigator.vibrate && navigator.vibrate(80); }catch(e){}
+  document.getElementById('camhint').textContent='נמצא!';
+  document.getElementById('camcode').textContent = code;
+  var match = skus.find(function(s){ return s.sku===code||s.sku.replace(/\s/g,'')===code.replace(/\s/g,''); });
+  document.getElementById('camname').textContent = match ? match.name : 'לא נמצא במאגר — יוכנס ידנית';
+  document.getElementById('camres').classList.add('on');
+  clearInterval(camInterval);
+}
+
+function useScan(){
+  var code = scanned;
+  closeCam();
+  var match = skus.find(function(s){ return s.sku===code||s.sku.replace(/\s/g,'')===code.replace(/\s/g,''); });
+  if(match){
+    applySku(match);
+    toast('נמצא: '+match.name+' ✓');
+  } else {
+    document.getElementById('fsearch').value = code;
+    document.getElementById('fname').value = code;
+    document.getElementById('namefld').style.display='';
+    document.getElementById('selbox').classList.remove('on');
+    toast('מק"ט הוכנס: '+code);
+  }
+}
+
+function closeCam(){
+  document.getElementById('cam').classList.remove('on');
+  clearInterval(camInterval);
+  if(camStream){ camStream.getTracks().forEach(function(t){ t.stop(); }); camStream=null; }
+  var vid = document.getElementById('camvid');
+  vid.srcObject=null; scanned=null;
+}
+
+/* ---- FORM ---- */
+function openForm(type){
+  curType=type;
+  document.getElementById('ftitle').textContent = type==='in'?'קיבלתי סחורה':'הוצאתי סחורה';
+  var b=document.getElementById('fbadge');
+  b.textContent=type==='in'?'כניסה':'יציאה';
+  b.className='fbadge '+(type==='in'?'bin':'bout');
+  document.getElementById('savebtn').className='savebtn '+(type==='in'?'sin':'sout');
+  clearSearch();
+  ['fname','fdesc','fsup','floc','fnotes'].forEach(function(id){ document.getElementById(id).value=''; });
+  document.getElementById('fqty').value='1';
+  document.getElementById('namefld').style.display='';
+  showView('form');
+  setTimeout(function(){ document.getElementById('fsearch').focus(); }, 350);
+}
+
+function chgQ(d){
+  var el=document.getElementById('fqty');
+  el.value=Math.max(1,(parseInt(el.value)||1)+d);
+}
+
+function submit(){
+  var name=(document.getElementById('fname').value.trim())||(selSku&&selSku.name)||'';
+  var sku=selSku?selSku.sku:'';
+  if(!name&&!sku){ toast('הכנס שם פריט או בחר מק"ט'); return; }
+  recs.unshift({
+    id:Date.now(), type:curType, sku:sku, name:name,
+    desc:document.getElementById('fdesc').value.trim(),
+    qty:parseInt(document.getElementById('fqty').value)||1,
+    supplier:document.getElementById('fsup').value.trim(),
+    location:document.getElementById('floc').value.trim(),
+    notes:document.getElementById('fnotes').value.trim(),
+    date:today(), time:nowTime()
+  });
+  lsSet('wh_recs',recs);
+  showView('home');
+  toast(curType==='in'?'כניסה נרשמה ✓':'יציאה נרשמה ✓');
+}
+
+function setF(f,btn){
+  curFilter=f;
+  document.querySelectorAll('.ftab').forEach(function(b){ b.classList.remove('on'); });
+  btn.classList.add('on');
+  renderLog();
+}
+
+function renderHome(){
+  var todays=recs.filter(function(r){ return r.date===today(); });
+  document.getElementById('s-in').textContent=todays.filter(function(r){ return r.type==='in'; }).reduce(function(a,r){ return a+r.qty; },0);
+  document.getElementById('s-out').textContent=todays.filter(function(r){ return r.type==='out'; }).reduce(function(a,r){ return a+r.qty; },0);
+  document.getElementById('s-total').textContent=recs.length;
+  renderLog();
+}
+
+function renderLog(){
+  var el=document.getElementById('loglist');
+  var todays=recs.filter(function(r){ return r.date===today(); });
+  var f=curFilter==='all'?todays:todays.filter(function(r){ return r.type===curFilter; });
+  el.innerHTML=f.length?f.map(function(r){ return itemHTML(r); }).join(''):'<div class="empty">אין פעולות היום</div>';
+}
+
+function renderHist(){
+  var el=document.getElementById('histlist');
+  el.innerHTML=recs.length?recs.map(function(r){ return itemHTML(r,true); }).join(''):'<div class="empty">אין רשומות</div>';
+}
+
+function itemHTML(r,d){
+  var meta=[(d?fmtD(r.date):''),r.time,(r.supplier?'· '+r.supplier:''),(r.location?'· '+r.location:'')].filter(Boolean).join(' ');
+  return '<div class="logitem">' +
+    '<div class="ldot '+(r.type==='in'?'din':'dout')+'"></div>' +
+    '<div class="lbody">' +
+      '<div class="lname">'+esc(r.name||r.sku)+'</div>' +
+      (r.sku?'<div class="lsku">'+esc(r.sku)+'</div>':'') +
+      (r.desc?'<div class="ldesc">'+esc(r.desc)+'</div>':'') +
+      '<div class="lmeta">'+meta+'</div>' +
+      (r.notes?'<div class="lnote">'+esc(r.notes)+'</div>':'') +
+    '</div>' +
+    '<div class="lqty '+(r.type==='in'?'qin':'qout')+'">'+(r.type==='in'?'+':'-')+r.qty+'</div>' +
+  '</div>';
+}
+
+function showView(n){
+  document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
+  document.getElementById('view-'+n).classList.add('active');
+  document.querySelector('.content').scrollTop=0;
+  if(n==='home') renderHome();
+  if(n==='history') renderHist();
+  if(n==='skus') renderSkuMgr();
+}
+
+function goNav(n){
+  document.querySelectorAll('.nitem').forEach(function(x){ x.classList.remove('on'); });
+  document.getElementById('nav-'+n).classList.add('on');
+  showView(n);
+}
+
+function clearAll(){
+  if(!confirm('למחוק את כל הרשומות?')) return;
+  recs=[]; lsSet('wh_recs',[]); renderHist(); renderHome(); toast('נמחק');
+}
+
+function exportCSV(){
+  if(!recs.length){ toast('אין נתונים'); return; }
+  var rows=[['סוג','מק"ט','שם','תיאור','כמות','ספק/לקוח','מיקום','הערות','תאריך','שעה']];
+  recs.forEach(function(r){ rows.push([r.type==='in'?'כניסה':'יציאה',r.sku||'',r.name,r.desc||'',r.qty,r.supplier||'',r.location||'',r.notes||'',r.date,r.time]); });
+  var csv='\uFEFF'+rows.map(function(r){ return r.map(function(c){ return '"'+(c||'').toString().replace(/"/g,'""')+'"'; }).join(','); }).join('\n');
+  var a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='מחסן_'+today()+'.csv';
+  a.click();
+  toast('הקובץ הורד');
+}
+
+function toast(msg){
+  var el=document.getElementById('toast');
+  el.textContent=msg; el.classList.add('on');
+  setTimeout(function(){ el.classList.remove('on'); },2500);
+}
+
+renderHome();
+renderSkuMgr();
+
+function closeBanner(){ 
+  document.getElementById('install-banner').classList.remove('show');
+  localStorage.setItem('banner_closed','1');
+}
+function checkBanner(){
+  var closed = localStorage.getItem('banner_closed');
+  var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var isStandalone = window.navigator.standalone;
+  if(!closed && isIOS && !isStandalone){
+    document.getElementById('install-banner').classList.add('show');
+  }
+}
+checkBanner();
+
+</script>
+
+<script>
+// Inline manifest (works without server)
+(function(){
+  var manifest = '{\n  "name": "מחסן — דיווח מלאי",\n  "short_name": "מחסן",\n  "description": "דיווח כניסות ויציאות מהמחסן",\n  "start_url": ".",\n  "display": "standalone",\n  "background_color": "#1D9E75",\n  "theme_color": "#1D9E75",\n  "lang": "he",\n  "dir": "rtl",\n  "orientation": "portrait",\n  "icons": [\n    {"src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADV0lEQVR4nO3c223VQABF0QTRBvRGEVAERUBvVMIHkgERQsj2Y2a8VgVzPVvnx/J9fPfl4wO81purD8DcBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAT0D98+fL76CEMT0HN+1KOhZzz6j8QnPRnN+6+fzj/J4CzQE/42OaboTxboNy9MxBRtLNBPLx8YU7SxQA8PIQhTZIHSnJiiWy/Qjtd/2ym67wLtOx63naI7LtChl323KbrdAh09FXebohst0MlXe5MpussCnT8MN5mi9Rfo2otcfocWD2iQGVg4o2UDGiSdzaoNrRnQaPVs1stotYCGTWezWENLBTR+PZtlMlokoInS2azR0AoBzVjPZvaM5g5o6nQ2Uzc0cUBr1LOZNKMpA1osnc2MDc0X0Kr1bObKaLKXqcvX8zDbb5xmgeZ6rN0sOzRHQHerZzN+RqMHdNt0NoM3NHRA6tkMm9GgAUnnT2M2NGJA6nnGaBmNFZB0XmKohgYKSD3/ZZCMhghIOq8zQkPXB6Se6NqMrgxIOnu5sKHLAlLP7i7J6IKApHOc8xs6+228eg51/uM9b4Gkc6bTpuikBVLPyU574IcvkHSudfQUHbtA6rnc0Vdw1AJJZzQHTdEhC6SeAR10KTsvkHTGt+8U7blA6pnCvte0zwJJZ0a7TNEOC6SeSe1ycWmBpLOGMkWvXyD1LKNc5UnvwtR2vnNeh032bTyjERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiOTt1Qc4ygj/4v6rVb+Ms0AkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIJLHd18+Xn0GJmaBSAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEi+A53F3a7Vv0PXAAAAAElFTkSuQmCC", "sizes": "192x192", "type": "image/png"},\n    {"src": "data:image/png;base64,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KAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgCgBAIgSAIAoAQCIEgCAKAEAiBIAgKj/jX4AdvDbX3+MfoScv3//c/QjsDwXAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBA1JdvP76PfgYABnABAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAEQJAECUAABECQBAlAAARAkAQJQAAET9H+BLO0hdvIRvAAAAAElFTkSuQmCC", "sizes": "512x512", "type": "image/png"}\n  ]\n}';
+  var blob = new Blob([manifest], {type:'application/json'});
+  var url = URL.createObjectURL(blob);
+  document.getElementById('manifest-link').href = url;
+})();
+
+// Service Worker registration
+if('serviceWorker' in navigator){
+  var swCode = `
+self.addEventListener('install', function(e){
+  e.waitUntil(
+    caches.open('mchsan-v1').then(function(cache){
+      return cache.addAll([location.href]);
+    })
+  );
+  self.skipWaiting();
+});
+self.addEventListener('fetch', function(e){
+  e.respondWith(
+    caches.match(e.request).then(function(r){ return r || fetch(e.request); })
+  );
+});
+`;
+  var swBlob = new Blob([swCode], {type:'text/javascript'});
+  var swUrl = URL.createObjectURL(swBlob);
+  navigator.serviceWorker.register(swUrl);
+}
+</script>
+</body>
+</html>
